@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pointschest-api
+    env: docker
+    plan: starter # Starter plan ensures the server doesn't sleep so the 9AM cron runs reliably
+    dockerfilePath: ./Dockerfile
+    disk:
+      name: pointschest-data
+      mountPath: /app/data
+      sizeGB: 1 # Ensures your scraped data persists across deployments and restarts
