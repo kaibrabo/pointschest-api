@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * parseCards.js
  *
@@ -468,7 +466,7 @@ function parseCards(text, issuer, opts = {}) {
   return cards;
 }
 
-module.exports = {
+export {
   parseCards,
   parseAnnualFee,
   parseRewardRate,

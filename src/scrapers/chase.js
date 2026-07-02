@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Chase scraper — PDF approach
  *
@@ -10,13 +8,13 @@
  * Akamai bot detection that blocks headless JS injection.
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards, applyNowSplitCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards, applyNowSplitCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://creditcards.chase.com/';
 const ISSUER = 'Chase';
 
-module.exports = async function scrapeChase(page, { detectBlock }) {
+export default async function scrapeChase(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 30000,
     waitMs: 5000,
@@ -40,4 +38,4 @@ module.exports = async function scrapeChase(page, { detectBlock }) {
   }
 
   return cards;
-};
+}

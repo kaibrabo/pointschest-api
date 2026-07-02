@@ -1,16 +1,14 @@
-'use strict';
-
 /**
  * US Bank scraper — PDF approach
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://www.usbank.com/credit-cards.html';
 const ISSUER = 'US Bank';
 
-module.exports = async function scrapeUsBank(page, { detectBlock }) {
+export default async function scrapeUsBank(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 30000,
     waitMs: 5000,
@@ -34,4 +32,4 @@ module.exports = async function scrapeUsBank(page, { detectBlock }) {
   }
 
   return cards;
-};
+}

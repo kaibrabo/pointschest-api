@@ -2,6 +2,7 @@
   "name": "pointschest-api",
   "version": "1.0.0",
   "description": "Credit card scraper API for PointsChest",
+  "type": "module",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

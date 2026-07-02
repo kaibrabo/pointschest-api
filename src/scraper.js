@@ -1,15 +1,17 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { chromium } from 'playwright';
 
-const fs = require('fs');
-const path = require('path');
-const { chromium } = require('playwright');
+import scrapeAmex from './scrapers/amex.js';
+import scrapeCapitalOne from './scrapers/capitalOne.js';
+import scrapeChase from './scrapers/chase.js';
+import scrapeCiti from './scrapers/citi.js';
+import scrapeUsBank from './scrapers/usBank.js';
+import scrapeDiscover from './scrapers/discover.js';
 
-const scrapeAmex = require('./scrapers/amex');
-const scrapeCapitalOne = require('./scrapers/capitalOne');
-const scrapeChase = require('./scrapers/chase');
-const scrapeCiti = require('./scrapers/citi');
-const scrapeUsBank = require('./scrapers/usBank');
-const scrapeDiscover = require('./scrapers/discover');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DATA_FILE = path.join(__dirname, '..', 'data', 'cards.json');
 
@@ -248,4 +250,4 @@ async function runAllScrapers() {
   return payload;
 }
 
-module.exports = { runAllScrapers };
+export { runAllScrapers };

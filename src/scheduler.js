@@ -1,7 +1,5 @@
-'use strict';
-
-const cron = require('node-cron');
-const { runAllScrapers } = require('./scraper');
+import cron from 'node-cron';
+import { runAllScrapers } from './scraper.js';
 
 // Runs every day at 9:00am Eastern Time (UTC-4 summer / UTC-5 winter).
 // node-cron uses the server's local timezone unless specified.
@@ -33,4 +31,4 @@ function startScheduler() {
   console.log(`[scheduler] Daily scrape scheduled for 9:00am ET (${TIMEZONE})`);
 }
 
-module.exports = { startScheduler };
+export { startScheduler };

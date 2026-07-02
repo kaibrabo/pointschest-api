@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * American Express scraper — PDF approach
  *
@@ -9,13 +7,13 @@
  * scripts into the page context.
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://www.americanexpress.com/us/credit-cards/';
 const ISSUER = 'American Express';
 
-module.exports = async function scrapeAmex(page, { detectBlock }) {
+export default async function scrapeAmex(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 35000,
     waitMs: 6000, // Amex loads slowly
@@ -39,4 +37,4 @@ module.exports = async function scrapeAmex(page, { detectBlock }) {
   }
 
   return cards;
-};
+}

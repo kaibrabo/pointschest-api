@@ -1,10 +1,12 @@
-'use strict';
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { runAllScrapers } from './scraper.js';
+import { startScheduler } from './scheduler.js';
 
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const { runAllScrapers } = require('./scraper');
-const { startScheduler } = require('./scheduler');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -167,4 +169,4 @@ app.listen(PORT, () => {
   startScheduler();
 });
 
-module.exports = app;
+export default app;

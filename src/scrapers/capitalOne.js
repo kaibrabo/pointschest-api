@@ -1,16 +1,14 @@
-'use strict';
-
 /**
  * Capital One scraper — PDF approach
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards, applyNowSplitCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards, applyNowSplitCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://www.capitalone.com/credit-cards/';
 const ISSUER = 'Capital One';
 
-module.exports = async function scrapeCapitalOne(page, { detectBlock }) {
+export default async function scrapeCapitalOne(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 30000,
     waitMs: 5000,
@@ -34,4 +32,4 @@ module.exports = async function scrapeCapitalOne(page, { detectBlock }) {
   }
 
   return cards;
-};
+}

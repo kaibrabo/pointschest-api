@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * pdfUtils.js
  *
@@ -14,9 +12,13 @@
  *   - No page.evaluate() — avoids the Amex "eval is disabled" crash.
  */
 
-const path = require('path');
-const fs = require('fs');
-const { PDFParse } = require('pdf-parse');
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { PDFParse } from 'pdf-parse';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PDF_DIR = path.join(__dirname, '..', '..', 'data', 'pdfs');
 
@@ -89,4 +91,4 @@ async function extractText(pdfBuffer) {
   return typeof result === 'string' ? result : JSON.stringify(result);
 }
 
-module.exports = { pageToText, extractText };
+export { pageToText, extractText };

@@ -1,16 +1,14 @@
-'use strict';
-
 /**
  * Citi scraper — PDF approach
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://www.citi.com/credit-cards/compare/view-all-credit-cards';
 const ISSUER = 'Citi';
 
-module.exports = async function scrapeCiti(page, { detectBlock }) {
+export default async function scrapeCiti(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 30000,
     waitMs: 5000,
@@ -34,4 +32,4 @@ module.exports = async function scrapeCiti(page, { detectBlock }) {
   }
 
   return cards;
-};
+}

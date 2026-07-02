@@ -1,18 +1,16 @@
-'use strict';
-
 /**
  * Discover scraper — PDF approach
  *
  * Discover has the lightest bot detection of the six issuers.
  */
 
-const { pageToText } = require('../utils/pdfUtils');
-const { parseCards, applyNowSplitCards } = require('../parsers/parseCards');
+import { pageToText } from '../utils/pdfUtils.js';
+import { parseCards, applyNowSplitCards } from '../parsers/parseCards.js';
 
 const LISTING_URL = 'https://www.discover.com/credit-cards/';
 const ISSUER = 'Discover';
 
-module.exports = async function scrapeDiscover(page, { detectBlock }) {
+export default async function scrapeDiscover(page, { detectBlock }) {
   const { text } = await pageToText(page, LISTING_URL, {
     navTimeout: 30000,
     waitMs: 4000,
@@ -36,4 +34,4 @@ module.exports = async function scrapeDiscover(page, { detectBlock }) {
   }
 
   return cards;
-};
+}
