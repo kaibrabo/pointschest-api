@@ -1,0 +1,39 @@
+name: Daily Credit Card Scraper
+
+on:
+  schedule:
+    # Runs at 13:00 UTC every day (9:00 AM Eastern Time)
+    - cron: '0 13 * * *'
+  workflow_dispatch: # Allows you to manually trigger it from the GitHub Actions tab
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps chromium
+
+    - name: Run Scraper
+      # This runs the scraping function directly without starting the Express server
+      run: node -e "require('./src/scraper').runAllScrapers().then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); })"
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add data/cards.json
+        # Only commit if the JSON file actually changed
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update daily credit card data" && git push)
